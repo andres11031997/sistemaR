@@ -49,21 +49,47 @@ namespace RewardSystem
         static void Main(string[] args)
         {
             Customer customer = new Customer();
+            bool exit = false;
 
-            Console.WriteLine("Enter purchase amount:");
-            decimal amount = Convert.ToDecimal(Console.ReadLine());
-            customer.RegisterPurchase(amount);
+            while (!exit)
+            {
+                Console.WriteLine("\n--- Reward System Menu ---");
+                Console.WriteLine("1. Register a purchase");
+                Console.WriteLine("2. Show total points");
+                Console.WriteLine("3. Redeem points");
+                Console.WriteLine("4. Exit");
+                Console.Write("Choose an option: ");
 
-            customer.ShowPoints();
+                string choice = Console.ReadLine();
 
-            Console.WriteLine("Enter points to redeem:");
-            int redeem = Convert.ToInt32(Console.ReadLine());
-            customer.RedeemPoints(redeem);
+                switch (choice)
+                {
+                    case "1":
+                        Console.Write("Enter purchase amount: ");
+                        decimal amount = Convert.ToDecimal(Console.ReadLine());
+                        customer.RegisterPurchase(amount);
+                        break;
 
-            customer.ShowPoints();
+                    case "2":
+                        customer.ShowPoints();
+                        break;
 
-            Console.WriteLine("Press any key to exit...");
-            Console.ReadKey();
+                    case "3":
+                        Console.Write("Enter points to redeem: ");
+                        int redeem = Convert.ToInt32(Console.ReadLine());
+                        customer.RedeemPoints(redeem);
+                        break;
+
+                    case "4":
+                        exit = true;
+                        Console.WriteLine("Exiting program...");
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid option. Please try again.");
+                        break;
+                }
+            }
         }
     }
 }
