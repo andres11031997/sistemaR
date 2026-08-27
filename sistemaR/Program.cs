@@ -4,14 +4,8 @@ namespace RewardSystem
 {
     public class Customer
     {
-        private int points;
+        private int points = 0;
 
-        public Customer()
-        {
-            points = 0;
-        }
-
-        // Register a purchase and calculate points
         public void RegisterPurchase(decimal amount)
         {
             if (amount <= 0)
@@ -25,13 +19,11 @@ namespace RewardSystem
             Console.WriteLine($"Purchase registered. Earned {earnedPoints} points.");
         }
 
-        // Show total points
         public void ShowPoints()
         {
             Console.WriteLine($"Total points: {points}");
         }
 
-        // Redeem points
         public void RedeemPoints(int pointsToRedeem)
         {
             if (pointsToRedeem <= 0)
@@ -58,11 +50,20 @@ namespace RewardSystem
         {
             Customer customer = new Customer();
 
-            customer.RegisterPurchase(5000); // Example purchase
+            Console.WriteLine("Enter purchase amount:");
+            decimal amount = Convert.ToDecimal(Console.ReadLine());
+            customer.RegisterPurchase(amount);
+
             customer.ShowPoints();
 
-            customer.RedeemPoints(3); // Example redemption
+            Console.WriteLine("Enter points to redeem:");
+            int redeem = Convert.ToInt32(Console.ReadLine());
+            customer.RedeemPoints(redeem);
+
             customer.ShowPoints();
+
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadKey();
         }
     }
 }
