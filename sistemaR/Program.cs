@@ -24,6 +24,12 @@ namespace RewardSystem
             Console.WriteLine($"Total points: {points}");
         }
 
+        public void ShowPointsValue()
+        {
+            decimal value = points * 100;
+            Console.WriteLine($"Your points are worth: ${value}");
+        }
+
         public void RedeemPoints(int pointsToRedeem)
         {
             if (pointsToRedeem <= 0)
@@ -56,38 +62,50 @@ namespace RewardSystem
                 Console.WriteLine("\n--- Reward System Menu ---");
                 Console.WriteLine("1. Register a purchase");
                 Console.WriteLine("2. Show total points");
-                Console.WriteLine("3. Redeem points");
-                Console.WriteLine("4. Exit");
+                Console.WriteLine("3. Show points value in money");
+                Console.WriteLine("4. Redeem points");
+                Console.WriteLine("5. Exit");
                 Console.Write("Choose an option: ");
 
                 string choice = Console.ReadLine();
 
-                switch (choice)
+                try
                 {
-                    case "1":
-                        Console.Write("Enter purchase amount: ");
-                        decimal amount = Convert.ToDecimal(Console.ReadLine());
-                        customer.RegisterPurchase(amount);
-                        break;
+                    switch (choice)
+                    {
+                        case "1":
+                            Console.Write("Enter purchase amount: ");
+                            decimal amount = Convert.ToDecimal(Console.ReadLine());
+                            customer.RegisterPurchase(amount);
+                            break;
 
-                    case "2":
-                        customer.ShowPoints();
-                        break;
+                        case "2":
+                            customer.ShowPoints();
+                            break;
 
-                    case "3":
-                        Console.Write("Enter points to redeem: ");
-                        int redeem = Convert.ToInt32(Console.ReadLine());
-                        customer.RedeemPoints(redeem);
-                        break;
+                        case "3":
+                            customer.ShowPointsValue();
+                            break;
 
-                    case "4":
-                        exit = true;
-                        Console.WriteLine("Exiting program...");
-                        break;
+                        case "4":
+                            Console.Write("Enter points to redeem: ");
+                            int redeem = Convert.ToInt32(Console.ReadLine());
+                            customer.RedeemPoints(redeem);
+                            break;
 
-                    default:
-                        Console.WriteLine("Invalid option. Please try again.");
-                        break;
+                        case "5":
+                            exit = true;
+                            Console.WriteLine("Exiting program...");
+                            break;
+
+                        default:
+                            Console.WriteLine("Invalid option. Please try again.");
+                            break;
+                    }
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Error: Invalid input. Please enter numbers only.");
                 }
             }
         }
